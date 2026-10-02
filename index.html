@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScamShield — Pause Before the Damage</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">🛡️ ScamShield</div>
+    <div class="tagline">Pause before the damage</div>
+  </div>
+  <select id="language">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+    <option value="bn">বাংলা</option>
+    <option value="ta">தமிழ்</option>
+    <option value="te">తెలుగు</option>
+    <option value="mr">मराठी</option>
+  </select>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <span class="pill">Bharat-first • Low bandwidth • Privacy-first</span>
+      <h1>Turn a suspicious moment into a safer decision.</h1>
+      <p>Paste a message, inspect a link, upload a screenshot, or use your voice. ScamShield highlights explainable red flags and suggests safe next steps.</p>
+    </div>
+    <div class="shield">🛡️</div>
+  </section>
+
+  <section class="panel">
+    <div class="tabs">
+      <button class="tab active" data-tab="message">Message</button>
+      <button class="tab" data-tab="url">URL</button>
+      <button class="tab" data-tab="screenshot">Screenshot</button>
+      <button class="tab" data-tab="voice">Voice</button>
+    </div>
+
+    <div id="message" class="tab-content active">
+      <label for="messageInput">Paste the suspicious message</label>
+      <textarea id="messageInput" placeholder="Example: URGENT! Your KYC expires today. Click the link and share your OTP..."></textarea>
+      <div class="actions">
+        <button id="analyzeBtn" class="primary">Analyze safely</button>
+        <button id="exampleBtn" class="secondary">Load demo example</button>
+      </div>
+    </div>
+
+    <div id="url" class="tab-content">
+      <label for="urlInput">Check a link without opening it</label>
+      <input id="urlInput" placeholder="https://example.com/verify">
+      <p class="hint">ScamShield does not open the URL. It checks the URL string only.</p>
+      <button id="checkUrlBtn" class="primary">Check URL</button>
+    </div>
+
+    <div id="screenshot" class="tab-content">
+      <label for="imageInput">Upload a screenshot</label>
+      <input id="imageInput" type="file" accept="image/*">
+      <div id="ocrStatus" class="hint"></div>
+      <button id="ocrBtn" class="primary">Read screenshot & analyze</button>
+    </div>
+
+    <div id="voice" class="tab-content">
+      <p>Use your browser microphone to dictate a suspicious message.</p>
+      <button id="voiceBtn" class="primary">🎙️ Start voice input</button>
+      <div id="voiceStatus" class="hint">Voice input uses your browser's speech recognition when supported.</div>
+      <textarea id="voiceText" placeholder="Your transcribed message will appear here..."></textarea>
+      <button id="voiceAnalyzeBtn" class="primary">Analyze transcription</button>
+    </div>
+  </section>
+
+  <section id="result" class="panel result hidden">
+    <div class="result-head">
+      <div>
+        <span class="small-title">SAFETY RESULT</span>
+        <h2 id="riskTitle">—</h2>
+      </div>
+      <div id="riskBadge" class="risk-badge">—</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <span>Risk score</span>
+        <strong id="riskScore">—</strong>
+      </div>
+      <div class="metric">
+        <span>Rule confidence</span>
+        <strong id="confidence">—</strong>
+      </div>
+      <div class="metric">
+        <span>Red flags</span>
+        <strong id="flagCount">—</strong>
+      </div>
+    </div>
+
+    <div class="result-grid">
+      <div>
+        <h3>🚩 What triggered the warning?</h3>
+        <div id="evidence"></div>
+      </div>
+      <div>
+        <h3>🛡️ Safer next steps</h3>
+        <ol id="safeSteps"></ol>
+      </div>
+    </div>
+
+    <div>
+      <h3>🔐 Sensitive information masked</h3>
+      <pre id="redactedText"></pre>
+    </div>
+
+    <div id="urlResults"></div>
+
+    <div class="report-row">
+      <button id="reportBtn" class="secondary">📋 Export incident report</button>
+      <button id="clearBtn" class="secondary">Clear</button>
+    </div>
+
+    <p class="disclaimer" id="disclaimer"></p>
+  </section>
+</main>
+
+<footer>
+  ScamShield is a prototype safety layer. It does not provide investment advice, buy/sell/hold recommendations, or price predictions.
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
